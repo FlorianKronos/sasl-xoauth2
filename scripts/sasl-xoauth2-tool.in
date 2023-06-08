@@ -155,7 +155,7 @@ def outlook_get_initial_tokens(client_id:str, client_secret:str, tenant:str, cod
     url = f"https://login.microsoftonline.com/{tenant}/oauth2/v2.0/token"
     token_request:Dict[str,str] = {}
     token_request['client_id'] = client_id
-    token_request['client_secret'] = client_secret
+#   token_request['client_secret'] = client_secret
     token_request['scope'] = OUTLOOK_SCOPE
     token_request['code'] = code
     token_request['redirect_uri'] = OUTLOOK_REDIRECT_URI
@@ -168,6 +168,7 @@ def outlook_get_initial_tokens(client_id:str, client_secret:str, tenant:str, cod
             headers={ "Content-Type": "application/x-www-form-urlencoded" }))
     if resp.code != 200:
         raise Exception(f"Request failed: {resp.code}")
+        print( url + data + headers )
     try:
         content = json.load(resp)
         return {
